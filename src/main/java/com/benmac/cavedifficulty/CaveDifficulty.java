@@ -15,16 +15,14 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 import org.slf4j.Logger;
 
-
-
 /**
- * CaveDifficulty — Makes it so the longer you are in a cave the harder the game gets.
+ * CaveDifficulty — Makes it so the longer you are in a cave the harder the game
+ * gets.
  */
 @Mod(CaveDifficulty.MODID)
 public class CaveDifficulty {
     public static final String MODID = "cavedifficulty";
     private static final Logger LOGGER = LogUtils.getLogger();
-
 
     public CaveDifficulty() {
         LOGGER.info("CAVEDIFFICULTY: mod constructor ran");

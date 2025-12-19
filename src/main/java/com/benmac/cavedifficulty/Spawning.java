@@ -72,7 +72,7 @@ public class Spawning {
 
         // Spend credits on spawns
         int attempts = 0;
-        while (credits >= getMinCost() && attempts < 50) {
+        while (credits >= getMinCost() && attempts < credits) {
             attempts++;
             SpawnEntry entry = selectRandomEntry(credits, monsterCount, random);
             if (entry == null) {
