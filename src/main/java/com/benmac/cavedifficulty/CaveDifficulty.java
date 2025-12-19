@@ -3,6 +3,7 @@ package com.benmac.cavedifficulty;
 import com.mojang.logging.LogUtils;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -11,7 +12,10 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+
 import org.slf4j.Logger;
+
+
 
 /**
  * CaveDifficulty — Makes it so the longer you are in a cave the harder the game gets.
@@ -20,6 +24,7 @@ import org.slf4j.Logger;
 public class CaveDifficulty {
     public static final String MODID = "cavedifficulty";
     private static final Logger LOGGER = LogUtils.getLogger();
+
 
     public CaveDifficulty() {
         LOGGER.info("CAVEDIFFICULTY: mod constructor ran");
@@ -43,6 +48,18 @@ public class CaveDifficulty {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
             // Client-only setup
+        }
+    }
+
+    // ------------------------------------------------------------------------
+    // Forge events
+    // ------------------------------------------------------------------------
+    @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+    public static class ForgeEvents {
+        @SubscribeEvent
+        public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
+            if (event.phase == TickEvent.Phase.END && event.player != null && !event.player.level().isClientSide) {
+            }
         }
     }
 }
