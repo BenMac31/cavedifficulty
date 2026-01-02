@@ -19,23 +19,23 @@ public class CaveCommands {
         CommandDispatcher<CommandSourceStack> dispatcher = event.getDispatcher();
 
         dispatcher.register(Commands.literal("cavepressure")
-            .requires(source -> source.hasPermission(0)) // Allow all players
-            .executes(context -> {
-                ServerPlayer player = context.getSource().getPlayerOrException();
-                CompoundTag data = player.getPersistentData();
-                int pressure = data.getInt("cavepressure");
-                player.sendSystemMessage(Component.literal("Your cave pressure is: " + pressure));
-                return 1;
-            }));
+                .requires(source -> source.hasPermission(4)) // Require operator
+                .executes(context -> {
+                    ServerPlayer player = context.getSource().getPlayerOrException();
+                    CompoundTag data = player.getPersistentData();
+                    int pressure = data.getInt("cavepressure");
+                    player.sendSystemMessage(Component.literal("Your cave pressure is: " + pressure));
+                    return 1;
+                }));
 
         dispatcher.register(Commands.literal("spawncavewave")
-            .requires(source -> source.hasPermission(0)) // Allow all players
-            .executes(context -> {
-                ServerPlayer player = context.getSource().getPlayerOrException();
-                CompoundTag data = player.getPersistentData();
-                int pressure = data.getInt("cavepressure");
-                Spawning.spawnWave(player.serverLevel(), player.blockPosition(), pressure, player);
-                return 1;
-            }));
+                .requires(source -> source.hasPermission(4)) // Require operator
+                .executes(context -> {
+                    ServerPlayer player = context.getSource().getPlayerOrException();
+                    CompoundTag data = player.getPersistentData();
+                    int pressure = data.getInt("cavepressure");
+                    Spawning.spawnWave(player.serverLevel(), player.blockPosition(), pressure, player);
+                    return 1;
+                }));
     }
 }
